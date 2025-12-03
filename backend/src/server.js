@@ -1,5 +1,6 @@
 import express from "express";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import cors from "cors";
 
 import { ENV } from "./lib/env.js";
@@ -7,7 +8,7 @@ import { connectDB } from "./lib/db.js";
 
 const app = express();
 
-const __dirname = path.resolve();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 app.use(express.json());
 app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
