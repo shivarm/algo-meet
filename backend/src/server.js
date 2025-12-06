@@ -25,10 +25,12 @@ app.get("/health", (_, res) => {
 
 // make our app ready for deployment
 if (ENV.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/dist")));
+  const clientDistPath = path.resolve(__dirname, "../../client/dist");
+  
+  app.use(express.static(clientDistPath));
 
   app.get("/{*any}", (_, res) => {
-    res.sendFile(path.join(__dirname, "../client", "dist", "index.html"));
+    res.sendFile(path.join(clientDistPath, "index.html"));
   });
 }
 
