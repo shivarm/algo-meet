@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import { Inngest } from "inngest";
 import { connectDB } from "./db.js";
-import { upserStreamUser, deleteStreamUser } from "./stream.js";
+import { upsertStreamUser, deleteStreamUser } from "./stream.js";
 
 export const inngest = new Inngest({ id: "algo-meet" });
 
@@ -22,7 +22,7 @@ const syncUser = inngest.createFunction(
 
     await User.create(newUser);
 
-    await upserStreamUser({
+    await upsertStreamUser({
       id: newUser.clerkId.toString(),
       name: newUser.name,
       image: newUser.profileImage 
