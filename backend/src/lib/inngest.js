@@ -1,6 +1,9 @@
 import User from "../models/user.model.js";
 import { Inngest } from "inngest";
 import { connectDB } from "./db.js";
+import { ENV } from "./env.js";
+import { sendEmail } from "../email/emailHandler.js";
+import { createWelcomeEmailTemplate } from "../email/emailTemplates.js";
 import { upsertStreamUser, deleteStreamUser } from "./stream.js";
 
 export const inngest = new Inngest({ id: "algo-meet" });
@@ -25,7 +28,13 @@ const syncUser = inngest.createFunction(
     await upsertStreamUser({
       id: newUser.clerkId.toString(),
       name: newUser.name,
-      image: newUser.profileImage 
+      image: newUser.profileImage,
+    });
+    const emailHtml = createWelcomeEmailTemplate(newUser.name, ENV.CLIENT_URL);
+    await sendEmail({
+      to: newUser.email,
+      subject: "Welcome to AlgoMeet! 🎉",
+      html: emailHtml,
     });
   }
 );
