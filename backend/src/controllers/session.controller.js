@@ -82,3 +82,60 @@ export const getSessionById = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const joinSession = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user?._id;
+    const clerkId = req.user?.clerkId;
+
+    const session = await Session.findById(id);
+    if (!session) return res.status(404).json({ message: "Session not found" });
+
+    // check if session is full
+    if (session.participant) return res.status(404).json({ message: "Session is full" });
+
+    session.participant = userId;
+    await session.save();
+
+    const channel = chatClient.channel("messaging", session.callId);
+    await channel.addMembers([clerkId]);
+
+    res.status(200).json({ session });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const endSession = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user?._id;
+
+    const session = await Session.findById(id);
+    if (!session) return res.status(404).json({ message: "Session not found" });
+
+    if (session.host.toString() !== userId.toString()) {
+      return res.status(403).json({ message: "Only host can end the session" });
+    }
+
+    if (session.status === "completed") {
+      return res.status(400).json({ message: "Session has completed" });
+    }
+
+    session.status = "completed";
+    await session.save();
+
+    // delete video calls- free space of stream
+    const call = streamClient.video.call("default", session.callId);
+    await call.delete({ hard: true });
+
+    // delete chats
+    const channel = chatClient.channel("messaging", session.callId);
+    await channel.delete();
+
+    res.status(200).json({ message: "Session ended successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
