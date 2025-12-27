@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
-import { SparklesIcon } from "lucide-react";
+import { ArrowRightIcon, SparklesIcon } from "lucide-react";
+import { SignInButton } from "@clerk/clerk-react";
 
 const HomePage = () => {
   return (
@@ -26,6 +27,15 @@ const HomePage = () => {
               </span>
             </div>
           </Link>
+          {/* Auth btn */}
+          <SignInButton mode="modal">
+            <button className="group px-6 py-3 bg-linear-to-r from-primary to-secondary
+             text-white rounded-xl font-semibold text-sm hover:shadow-xl transition-all 
+             duration-200 hover:scale-105 flex items-center gap-2">
+              <span>Getting Started</span>
+              <ArrowRightIcon className="size-4"/>
+             </button>
+          </SignInButton>
         </div>
       </nav>
     </div>
