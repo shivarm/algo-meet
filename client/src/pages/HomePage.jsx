@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { ArrowRightIcon, CheckIcon, SparklesIcon, VideoIcon, ZapIcon } from "lucide-react";
+import {
+  ArrowRightIcon,
+  CheckIcon,
+  Code,
+  SparklesIcon,
+  User,
+  Users,
+  VideoIcon,
+  ZapIcon,
+} from "lucide-react";
 import { SignInButton } from "@clerk/clerk-react";
 
 const HomePage = () => {
@@ -20,7 +29,7 @@ const HomePage = () => {
 
             <div className="flex flex-col">
               <span className="font-black text-xl bg-linear-to-br from-primary via-secondary to-accent bg-clip-text text-transparent font-mono tracking-wider">
-                Talent IQ
+                Algo Meet
               </span>
               <span className="text-xs text-base-content/60 font-medium -mt-1">
                 pair programming
@@ -124,6 +133,57 @@ const HomePage = () => {
             className="w-full h-auto rounded-3xl shadow-2xl border-4 border-base-100 
            hover:scale-105 transition-transform duration-500"
           />
+        </div>
+      </div>
+
+      {/* Features */}
+      <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold mb-4">
+            Everything You Need to <span className="text-primary font-mono">Succeed</span>
+          </h2>
+          <p className="text-lg text-base-content/70 max-w-2xl mx-auto">
+            Interactive features designed to make your coding interviews seamless and productive
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="card bg-base-100 shadow-xl">
+            <div className="card-body items-center text-center">
+              <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
+                <VideoIcon className="size-8 text-primary" />
+              </div>
+              <h3 className="card-title">Crystal Clear Video Calls</h3>
+              <p className="text-base-content/70">
+                Connect face-to-face with HD video and audio for a truly immersive interview
+                experience. Feel the energy, see the reactions, and communicate effortlessly.
+              </p>
+            </div>
+          </div>
+          <div className="card bg-base-100 shadow-xl">
+            <div className="card-body items-center text-center">
+              <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
+                <Code className="size-8 text-primary" />
+              </div>
+              <h3 className="card-title">Collaborative Code Editor</h3>
+              <p className="text-base-content/70">
+                Write, edit, and debug code together in real time. Enjoy syntax highlighting,
+                multi-language support, and instant feedback to supercharge your learning.
+              </p>
+            </div>
+          </div>
+          <div className="card bg-base-100 shadow-xl">
+            <div className="card-body items-center text-center">
+              <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-4">
+                <Users className="size-8 text-primary" />
+              </div>
+              <h3 className="card-title">Seamless Collaboration</h3>
+              <p className="text-base-content/70">
+                Pair up with friends, mentors, or interviewers. Share ideas, solve problems, and
+                grow together with real-time chat and interactive sessions.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
