@@ -8,5 +8,13 @@ export default defineConfig({
   server: {
     port: 3000,
     open: true
-  }
+  },
+   build: {
+    minify: 'esbuild', 
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console logs for production
+      },
+    },
+  },
 })
