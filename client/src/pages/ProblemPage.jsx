@@ -1,7 +1,12 @@
 import React from "react";
+import Navbar from "../components/Navbar";
 
-const AboutPage = () => {
-  return <div>AboutPage</div>;
+const ProblemPage = () => {
+  return (
+    <div className="min-h-screen bg-base-200">
+      <Navbar />
+    </div>
+  );
 };
 
-export default AboutPage;
+export default ProblemPage;
