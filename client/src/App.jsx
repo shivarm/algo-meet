@@ -5,7 +5,9 @@ import DashboardPage from "./pages/DashboardPage";
 import ProblemPage from "./pages/ProblemPage";
 
 function App() {
-  const { isSignedIn } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+
+  if (!isLoaded) return null;
 
   return (
     <Routes>
