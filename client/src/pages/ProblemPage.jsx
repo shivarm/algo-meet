@@ -7,6 +7,11 @@ import { getDifficultyBadgeClass } from "../lib/utils";
 
 const ProblemPage = () => {
   const problems = Object.values(PROBLEMS);
+  // Count problems by difficulty
+  const total = problems.length;
+  const easy = problems.filter(p => p.difficulty === "Easy").length;
+  const medium = problems.filter(p => p.difficulty === "Medium").length;
+  const hard = problems.filter(p => p.difficulty === "Hard").length;
 
   return (
     <div className="min-h-screen bg-base-200">
@@ -14,10 +19,21 @@ const ProblemPage = () => {
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">Practice Problems</h1>
-          <p className="text-base-content/70">
-            Sharpen your skills with curated coding challenges!
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">Practice Problems</h1>
+              <p className="text-base-content/70">
+                Sharpen your skills with curated coding challenges!
+              </p>
+            </div>
+            <div className="flex flex-col items-end gap-1">
+              <div className="flex gap-2">
+                <span className="badge badge-success">Easy: {easy}</span>
+                <span className="badge badge-warning">Medium: {medium}</span>
+                <span className="badge badge-error">Hard: {hard}</span>
+              </div>
+            </div>
+          </div>
         </div>
         {/* Problems */}
         <div className="space-y-4">
