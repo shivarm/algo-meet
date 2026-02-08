@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router";
 import HomePage from "./pages/HomePage";
 import DashboardPage from "./pages/DashboardPage";
 import ProblemPage from "./pages/ProblemPage";
+import ProblemDetail from "./pages/ProblemDetail";
 
 function App() {
   const { isSignedIn, isLoaded } = useUser();
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={!isSignedIn ? <HomePage /> : <Navigate to={"/dashboard"} />} />
       <Route path="/dashboard" element={isSignedIn ? <DashboardPage /> : <Navigate to={"/"} />} />
       <Route path="/problems" element={isSignedIn ? <ProblemPage /> : <Navigate to={"/"} />} />
+      <Route path="/problem/:id" element={isSignedIn ? <ProblemDetail /> : <Navigate to={"/"} />} />
     </Routes>
   );
 }
